@@ -1,0 +1,15 @@
+# Node.js
+node_modules/
+
+# loggar
+*.log
+
+# Operativsystem-specifika filer
+.DS_Store
+Thumbs.db
+
+# miljövariabler
+.env
+
+# npm-paket som inte ska versioneras
+package-lock.json
