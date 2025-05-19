@@ -1,6 +1,6 @@
-import express from "express";
-import { placeOrder, getOrderHistory } from "../controllers/orderController.js";
-import authMiddleware from "../middleware/authMiddleware.js";
+import express from 'express';
+import { placeOrder, getOrderHistory } from '../controllers/orderController.js';
+// import authMiddleware from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
@@ -46,7 +46,8 @@ const router = express.Router();
  *       401:
  *         description: Unauthorized
  */
-router.post("/", authMiddleware, placeOrder);
+router.post('/', placeOrder);
+// Lägg tillbaka authMiddleware
 
 /**
  * @swagger
@@ -87,6 +88,7 @@ router.post("/", authMiddleware, placeOrder);
  *       401:
  *         description: Unauthorized
  */
-router.get("/history", authMiddleware, getOrderHistory);
+router.get('/history', getOrderHistory);
+//Lägg tillbaka authMiddleware
 
 export default router;

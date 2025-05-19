@@ -1,5 +1,5 @@
-import express from "express";
-import { register, login } from "../controllers/authController.js";
+import express from 'express';
+import { userRegister, userLogin } from '../controllers/authController.js';
 
 const router = express.Router();
 
@@ -36,7 +36,7 @@ const router = express.Router();
  *       400:
  *         description: Bad request / validation error
  */
-router.post("/register", register);
+router.post('/register', userRegister);
 
 /**
  * @swagger
@@ -64,6 +64,6 @@ router.post("/register", register);
  *       401:
  *         description: Invalid credentials
  */
-router.post("/login", login);
+router.post('/login', userLogin);
 
 export default router;
