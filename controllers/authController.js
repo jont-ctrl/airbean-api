@@ -49,7 +49,7 @@ export const userLogin = async (req, res) => {
         .status(401)
         .json({ error: 'Ogiltigt användarnamn eller lösenord' });
 
-    const isValid = await bcrypt.compare(password, user.rows[0].passwword);
+    const isValid = await bcrypt.compare(password, user.rows[0].password);
 
     if (!isValid)
       return res
