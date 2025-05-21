@@ -20,7 +20,7 @@ async function setup() {
       CREATE TABLE IF NOT EXISTS orders (
         id SERIAL PRIMARY KEY,
         user_id UUID NOT NULL REFERENCES users(user_id),
-        order_nr VARCHAR(20) UNIQUE NOT NULL,
+        order_nr VARCHAR(80) UNIQUE NOT NULL,
         total_price INTEGER NOT NULL,
         created_at TIMESTAMP DEFAULT NOW()
       );
