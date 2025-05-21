@@ -51,27 +51,26 @@ export const placeOrder = async (req, res) => {
 };
 
 export const getOrderHistory = async (req, res) => {
-  const { user_id } = req.params; // Anpassa för routes
+  const { user_id } = req.body;
 
   try {
     const result = await db.query(
-      'SELECT * FROM orders WHERE user_id = $1 ORDER BY created_at DESC', // Anpassa för databas
+      `SELECT 
+         o.*, 
+         oi.* 
+       FROM orders o, order_items oi
+       WHERE o.id = oi.order_id
+         AND o.user_id = $1
+       ORDER BY o.created_at DESC, oi.id`,
       [user_id]
     );
 
-    const now = new Date();
-    const orders = result.rows.map((order) => ({
-      ...order,
-      status: isBefore(new Date(order.created_at), now)
-        ? 'completed'
-        : 'active',
-    }));
-
-    res.json({
+    res.status(200).json({
       status: 'success',
-      data: orders,
+      data: result.rows,
     });
   } catch (error) {
+    console.error('Fel vid hämtning av beställningar:', error);
     res.status(500).json({ error: 'Kunde inte hämta beställningar' });
   }
 };
