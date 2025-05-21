@@ -2,12 +2,12 @@ import db from '../models/db.js';
 import { isBefore } from 'date-fns';
 
 export const placeOrder = async (req, res) => {
-  const { userId, orderItems } = req.body; // Anpass för routes
+  const { user_id, orderItems } = req.body; // Anpass för routes
 
   try {
     const orderResult = await db.query(
       'INSERT INTO order (user_id, created_at) VALUES ($1, NOW()) RETURNING id', // Anpassa för databas
-      [userId]
+      [user_id]
     );
 
     const orderId = orderResult.rows[0].id; // Anpassa för databas
@@ -30,12 +30,12 @@ export const placeOrder = async (req, res) => {
 };
 
 export const getOrderHistory = async (req, res) => {
-  const { userId } = req.params; // Anpassa för routes
+  const { user_id } = req.params; // Anpassa för routes
 
   try {
     const result = await db.query(
       'SELECT * FROM orders WHERE user_id = $1 ORDER BY created_at DESC', // Anpassa för databas
-      [userId]
+      [user_id]
     );
 
     const now = new Date();
