@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import db from '../models/db.js';
+import { v4 as uuidv4 } from 'uuid';
 
 export const userRegister = async (req, res) => {
   const { username, password } = req.body; // Anpassa för routes
@@ -15,10 +16,13 @@ export const userRegister = async (req, res) => {
     }
 
     const hash = await bcrypt.hash(password, 10);
+    const userId = uuidv4();
 
     const result = await db.query(
-      'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id, username',
-      [username, hash]
+      `INSERT INTO users (user_id, username, password)
+       VALUES ($1, $2, $3)
+       RETURNING user_id, username`,
+      [userId, username, hash]
     );
 
     res.status(201).json({
@@ -29,6 +33,7 @@ export const userRegister = async (req, res) => {
       },
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({
       status: 'fail',
       message: 'Kunde inte registrera användaren',

@@ -33,9 +33,9 @@ async function setup() {
       );
     `);
 
-    console.log(" Tabeller skapade!");
+    console.log(' Tabeller skapade!');
   } catch (err) {
-    console.error(" Fel vid tabellskapande:", err);
+    console.error(' Fel vid tabellskapande:', err);
   } finally {
     process.exit();
   }
