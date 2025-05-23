@@ -1,5 +1,6 @@
 import express from 'express';
 import { userRegister, userLogin } from '../controllers/authController.js';
+import validateLogin from '../middleware/middleware.js';
 
 const router = express.Router();
 
@@ -64,6 +65,6 @@ router.post('/register', userRegister);
  *       401:
  *         description: Invalid credentials
  */
-router.post('/login', userLogin);
+router.post('/login', validateLogin, userLogin);
 
 export default router;

@@ -7,6 +7,7 @@ import swaggerSpec from './swagger/swagger.js'; // adjust path if needed
 import authRoutes from './routes/authRoutes.js';
 import menuRoutes from './routes/menuRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import validateLogin from './middleware/middleware.js';
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -33,8 +34,4 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`✅ Server running at http://localhost:${PORT}`);
   console.log(`📚 Swagger docs at http://localhost:${PORT}/api-docs`);
-});
-
-app.post('/login', validateLogin, (req, res) => {
-  res.send('request is valid');
 });
