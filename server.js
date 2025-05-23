@@ -7,7 +7,6 @@ import swaggerSpec from './swagger/swagger.js'; // adjust path if needed
 import authRoutes from './routes/authRoutes.js';
 import menuRoutes from './routes/menuRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
-import validateLogin from './middleware/middleware.js';
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
